@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SpeeddyTest</string>
+    <string name="title_activity_spash">SpashActivity</string>
+    <string name="speddytest">SpeddyTest</string>
+    <string name="enter_user">Enter your user</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="text_login">Login</string>
+</resources>
