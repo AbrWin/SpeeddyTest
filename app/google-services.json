@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "544567957025",
+    "firebase_url": "https://speedtest-85251.firebaseio.com",
+    "project_id": "speedtest-85251",
+    "storage_bucket": "speedtest-85251.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544567957025:android:9dbf015750f472fc",
+        "android_client_info": {
+          "package_name": "com.abrsoftware.speeddytest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544567957025-6o4kbfh4n36isccf3n16iercbf7gsjks.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.abrsoftware.speeddytest",
+            "certificate_hash": "9b56c79b4115540073cea1abe768837551cbc8b5"
+          }
+        },
+        {
+          "client_id": "544567957025-rujbgo748h8h98ro64ngnb4d63mpcgkc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-L99f6b0SOmdggsNAVpKauWrLvnJRfQQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544567957025-rujbgo748h8h98ro64ngnb4d63mpcgkc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

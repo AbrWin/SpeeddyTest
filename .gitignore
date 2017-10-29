@@ -6,4 +6,7 @@
 .DS_Store
 /build
 /captures
+/.idea
+.idea
 .externalNativeBuild
+app/libs/
