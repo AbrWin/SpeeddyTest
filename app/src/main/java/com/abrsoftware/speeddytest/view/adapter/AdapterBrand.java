@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.abrsoftware.speeddytest.R;
@@ -33,10 +34,25 @@ public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder>
     }
 
     @Override
-    public void onBindViewHolder(BrandHolder holder, int position) {
+    public void onBindViewHolder(final BrandHolder holder, int position) {
         holder.singleBrand = brandList.get(position);
         holder.nameBran.setText(holder.singleBrand.getName());
         holder.resume.setText(holder.singleBrand.getResume());
+
+        //in some cases, it will prevent unwanted situations
+        holder.checkBox.setOnCheckedChangeListener(null);
+
+        //if true, your checkbox will be selected, else unselected
+        holder.checkBox.setChecked(holder.checkBox.isSelected());
+
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //set your object's last status
+                holder.checkBox.setSelected(isChecked);
+            }
+        });
+
     }
 
     @Override
@@ -48,14 +64,14 @@ public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder>
         private TextView nameBran;
         private TextView resume;
         private CheckBox checkBox;
-        private Brand singleBrand;
+        public Brand singleBrand;
 
         public BrandHolder(View itemView) {
             super(itemView);
             nameBran = itemView.findViewById(R.id.nameBrand);
             resume = itemView.findViewById(R.id.resumeBrand);
             checkBox = itemView.findViewById(R.id.checkBox);
-            itemView.setOnClickListener((View.OnClickListener) this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -63,6 +79,7 @@ public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder>
             listener.onClickRecipe(this);
         }
     }
+
 
     public interface onItemClickListener {
         void onClickRecipe(BrandHolder itemHolder);

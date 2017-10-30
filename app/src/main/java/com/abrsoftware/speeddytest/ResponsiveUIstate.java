@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.abrsoftware.speeddytest.view.LoginView.LoginView;
+import com.abrsoftware.speeddytest.view.detailBrand.DetailBrandView;
 import com.abrsoftware.speeddytest.view.homeView.HomeView;
+import com.abrsoftware.speeddytest.view.thankyou.ThankYouView;
 
 /**
  * Created by AbrWin on 29/10/17.
@@ -23,6 +25,18 @@ public enum ResponsiveUIstate {
         @Override
         public Fragment execute(MainActivity activity) {
             return setNewFragment(activity, R.id.fragment_container, HomeView.class);
+        }
+    },
+    DETAILBRAND() {
+        @Override
+        public Fragment execute(MainActivity activity) {
+            return setNewFragment(activity, R.id.fragment_container, DetailBrandView.class);
+        }
+    },
+    THANK_YOU() {
+        @Override
+        public Fragment execute(MainActivity activity) {
+            return setNewFragment(activity, R.id.fragment_container, ThankYouView.class);
         }
     };
 

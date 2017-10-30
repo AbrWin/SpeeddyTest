@@ -13,4 +13,10 @@
     <string name="error_password">Ingresa correctamente tu contraseña</string>
     <string name="error_mail">Ingresa correctamente tu email</string>
     <string name="my_home">My home</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="descargar">Download</string>
+    <string name="thank_you">Thank you Speedy Mobil</string>
+    <string name="tu_msisdn_es">Tu msisdn es:</string>
+    <string name="error_msidn">Da permiso para ver su número </string>
 </resources>

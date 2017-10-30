@@ -71,6 +71,12 @@ public class LoginView extends Fragment implements LoginMVP.View {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).showToolbar(false, "");
+    }
+
+    @Override
     public void showMsj(String msj) {
         Toast.makeText(getContext(), msj, Toast.LENGTH_SHORT).show();
     }
