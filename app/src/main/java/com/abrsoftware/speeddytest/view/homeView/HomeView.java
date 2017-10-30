@@ -16,6 +16,7 @@ import com.abrsoftware.speeddytest.dummy.DummyBrand;
 import com.abrsoftware.speeddytest.model.Brand;
 import com.abrsoftware.speeddytest.view.adapter.AdapterBrand;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeView extends Fragment implements AdapterBrand.onItemClickListener {
@@ -23,6 +24,7 @@ public class HomeView extends Fragment implements AdapterBrand.onItemClickListen
     private View rootView;
     private AdapterBrand adapterBrand;
     private List<Brand> brandList;
+    private List<Brand> newList;
     private LinearLayoutManager linearLayout;
     private RecyclerView recyclerBrands;
     private Button btnAcept;
@@ -48,9 +50,26 @@ public class HomeView extends Fragment implements AdapterBrand.onItemClickListen
         recyclerBrands = rootView.findViewById(R.id.recyclerBrands);
         DummyBrand dummyBrand = new DummyBrand();
         brandList = dummyBrand.getListBrand();
-        adapterBrand = new AdapterBrand(brandList, this);
-        recyclerBrands.setLayoutManager(linearLayout);
-        recyclerBrands.setAdapter(adapterBrand);
+        newList = new ArrayList<>();
+        lisInView(brandList);
+
+        btnAcept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (newList != null && newList.size() > 0) {
+                    lisInView(newList);
+                }
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (brandList != null && brandList.size() > 0) {
+                    lisInView(brandList);
+                }
+            }
+        });
         return rootView;
     }
 
@@ -66,5 +85,23 @@ public class HomeView extends Fragment implements AdapterBrand.onItemClickListen
         Bundle bundle = new Bundle();
         bundle.putSerializable("brand", brand);
         ((MainActivity) getActivity()).changeFragment(ResponsiveUIstate.DETAILBRAND.setBundle(bundle));
+    }
+
+    @Override
+    public void onItemCheck(AdapterBrand.BrandHolder item) {
+        item.singleBrand.setChecked(true);
+        newList.add(item.singleBrand);
+    }
+
+    @Override
+    public void onItemUncheck(AdapterBrand.BrandHolder item) {
+        newList.remove(item.singleBrand);
+    }
+
+    private void lisInView(List<Brand> brandList) {
+        adapterBrand = new AdapterBrand(brandList, this);
+        recyclerBrands.setLayoutManager(linearLayout);
+        recyclerBrands.setAdapter(adapterBrand);
+        adapterBrand.notifyDataSetChanged();
     }
 }

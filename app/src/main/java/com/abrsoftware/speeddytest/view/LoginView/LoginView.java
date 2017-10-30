@@ -18,8 +18,8 @@ import com.abrsoftware.speeddytest.view.LoginView.LoginMVP.LoginPresenterImp;
 
 public class LoginView extends Fragment implements LoginMVP.View {
 
-    private LoginPresenterImp presenterImp;
-    private View rootView;
+    public LoginPresenterImp presenterImp;
+    public View rootView;
 
     public LoginView() {
         // Required empty public constructor

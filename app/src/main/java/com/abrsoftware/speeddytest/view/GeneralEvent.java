@@ -15,9 +15,9 @@ public class GeneralEvent {
     public final static int onSignInError = 10;
     public final static int onErrorDataBase = 11;
 
-    private int eventType;
-    private String errorMessage;
-    private int statusCode;
+    public int eventType;
+    public String errorMessage;
+    public int statusCode;
 
     public int getEventType() {
         return eventType;

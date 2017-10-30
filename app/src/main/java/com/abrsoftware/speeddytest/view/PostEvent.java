@@ -7,7 +7,7 @@ import com.abrsoftware.speeddytest.helper.GreenRoboHelper;
 
 public class PostEvent {
 
-    private GreenRoboHelper eventBus;
+    public GreenRoboHelper eventBus;
 
     public PostEvent() {
         this.eventBus = GreenRoboHelper.getInstance();

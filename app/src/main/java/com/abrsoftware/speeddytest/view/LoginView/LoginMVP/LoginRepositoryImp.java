@@ -23,10 +23,9 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 
 public class LoginRepositoryImp extends PostEvent implements LoginMVP.Repository {
-    private FirebaseAuth authReference;
+    public FirebaseAuth authReference;
 
     public LoginRepositoryImp() {
-        super();
         this.authReference = FirebaseHelper.getAuthReference();
     }
 
@@ -51,7 +50,7 @@ public class LoginRepositoryImp extends PostEvent implements LoginMVP.Repository
         }
     }
 
-    private boolean isGooglePlayServicesAvaliable(Context context) {
+    public boolean isGooglePlayServicesAvaliable(Context context) {
         int statusCode = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
         if (GoogleApiAvailability.getInstance().isUserResolvableError(statusCode)) {
             postEvent(GeneralEvent.onBeUserResolvableError, statusCode);
@@ -63,7 +62,7 @@ public class LoginRepositoryImp extends PostEvent implements LoginMVP.Repository
         return true;
     }
 
-    private void doSingInUser(String email, String password) {
+    public void doSingInUser(String email, String password) {
         authReference.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

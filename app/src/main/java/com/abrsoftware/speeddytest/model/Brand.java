@@ -9,6 +9,15 @@ import java.io.Serializable;
 public class Brand implements Serializable{
     private String name;
     private String resume;
+    private boolean isChecked;
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public String getName() {
         return name;

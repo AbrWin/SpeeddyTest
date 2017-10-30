@@ -5,6 +5,7 @@ import com.abrsoftware.speeddytest.helper.GreenRoboHelper;
 import com.abrsoftware.speeddytest.view.GeneralEvent;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by AbrWin on 29/10/17.
@@ -12,9 +13,9 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class LoginPresenterImp implements LoginMVP.Presenter {
 
-    private Eventbus eventbus;
-    private LoginMVP.View cAccountView;
-    private LoginRepositoryImp loginRepositoryImp;
+    public Eventbus eventbus;
+    public LoginMVP.View cAccountView;
+    public LoginRepositoryImp loginRepositoryImp;
 
     public LoginPresenterImp(LoginMVP.View cAccountView) {
         this.eventbus = GreenRoboHelper.getInstance();
@@ -37,7 +38,7 @@ public class LoginPresenterImp implements LoginMVP.Presenter {
         eventbus.unregister(this);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     @Override
     public void onEventMainThread(GeneralEvent event) {
         if (event != null) {
