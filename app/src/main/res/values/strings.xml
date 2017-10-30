@@ -8,4 +8,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_connec">¡Ups! Hay un problema de conexión...</string>
+    <string name="error_playservices">Se requiere Google Play Services para usar la app</string>
+    <string name="error_password">Ingresa correctamente tu contraseña</string>
+    <string name="error_mail">Ingresa correctamente tu email</string>
+    <string name="my_home">My home</string>
 </resources>

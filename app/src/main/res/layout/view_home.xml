@@ -1,13 +1,27 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.abrsoftware.speeddytest.view.homewview.HomeView">
+    android:orientation="vertical"
+    tools:context="com.abrsoftware.speeddytest.view.homeView.HomeView">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/my_home"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-</FrameLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerBrands"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        tools:listitem="@layout/item_news" />
+
+</LinearLayout>

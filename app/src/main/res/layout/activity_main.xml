@@ -3,20 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.abrsoftware.speeddytest.MainActivity">
 
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@android:color/white"
+        android:visibility="gone"/>
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1" >
+    </FrameLayout>
 
 
 </LinearLayout>

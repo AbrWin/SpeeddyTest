@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.abrsoftware.speeddytest.view.LoginView.LoginView;
+import com.abrsoftware.speeddytest.view.homeView.HomeView;
 
 /**
  * Created by AbrWin on 29/10/17.
@@ -16,6 +17,12 @@ public enum ResponsiveUIstate {
         @Override
         public Fragment execute(MainActivity activity) {
             return setNewFragment(activity, R.id.fragment_container, LoginView.class);
+        }
+    },
+    HOME() {
+        @Override
+        public Fragment execute(MainActivity activity) {
+            return setNewFragment(activity, R.id.fragment_container, HomeView.class);
         }
     };
 
