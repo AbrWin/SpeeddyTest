@@ -46,6 +46,7 @@ public class LoginRepositoryImp extends PostEvent implements LoginMVP.Repository
         } else if (TextUtils.isEmpty(password)) {
             postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_password));
         } else {
+            postEvent(GeneralEvent.showLoading);
             doSingInUser(email, password);
         }
     }

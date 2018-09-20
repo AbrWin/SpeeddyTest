@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="end_point">http://webservices.escuderiatelmex.com/ET_MX_APP_WS/services/EscuderiaTelmexWS/</string>
+</resources>

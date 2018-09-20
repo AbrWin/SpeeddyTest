@@ -1,30 +1,35 @@
-package com.abrsoftware.speeddytest.view.detailBrand;
+package com.abrsoftware.speeddytest.view.detailNews;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abrsoftware.speeddytest.MainActivity;
+import com.abrsoftware.speeddytest.MyApplication;
 import com.abrsoftware.speeddytest.R;
 import com.abrsoftware.speeddytest.ResponsiveUIstate;
 import com.abrsoftware.speeddytest.model.Brand;
+import com.abrsoftware.speeddytest.model.News;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 
-public class DetailBrandView extends Fragment {
+public class DetailNewsView extends Fragment {
 
 
     private View rootView;
     private TextView nameBrand;
     private TextView resumeBrand;
-    private Button btnDownload;
-    private Button goHome;
+    private ImageView imgDeatil;
 
 
-    public DetailBrandView() {
+    public DetailNewsView() {
         // Required empty public constructor
     }
 
@@ -40,30 +45,24 @@ public class DetailBrandView extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.view_detail_brand, container, false);
         nameBrand = rootView.findViewById(R.id.nameBrand);
-        resumeBrand = rootView.findViewById(R.id.resumeBrand);
-        goHome = rootView.findViewById(R.id.goHome);
+        resumeBrand = rootView.findViewById(R.id.description);
+        imgDeatil = rootView.findViewById(R.id.imgDatailNews);
 
         if (getArguments() != null) {
-            Brand brand = (Brand) getArguments().getSerializable("brand");
-            nameBrand.setText(brand.getName());
-            resumeBrand.setText(brand.getResume());
+            News news = (News) getArguments().getSerializable("news");
+            nameBrand.setText(news.getTitle());
+            resumeBrand.setText(Html.fromHtml(news.getText()));
+            Glide.with(MyApplication.getCtx())
+                    .load(news.getUrlImagenHD()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.RESULT).into(imgDeatil);
         }
 
-        btnDownload = rootView.findViewById(R.id.download);
-        btnDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity) getActivity()).changeFragment(ResponsiveUIstate.THANK_YOU);
-            }
-        });
 
-        goHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity) getActivity()).changeFragment(ResponsiveUIstate.HOME);
-            }
-        });
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).showBackBtn(true);
+    }
 }

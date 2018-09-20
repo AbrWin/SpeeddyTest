@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.abrsoftware.speeddytest.helper.FirebaseHelper;
+import com.abrsoftware.speeddytest.service.ApiServiceSingleton;
 import com.abrsoftware.speeddytest.view.LoginView.LoginView;
 import com.abrsoftware.speeddytest.view.homeView.HomeView;
 import com.abrsoftware.speeddytest.view.thankyou.ThankYouView;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         tMgr = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         setSupportActionBar(toolbar);
+        ApiServiceSingleton.getInstance().apiService.initApiService();
         if (FirebaseHelper.getInstance().getAuthReference().getCurrentUser() == null) {
             changeFragment(ResponsiveUIstate.LOGIN);
         } else {
@@ -51,6 +53,19 @@ public class MainActivity extends AppCompatActivity {
     public void showToolbar(boolean show, String title) {
         toolbar.setVisibility(show ? View.VISIBLE : View.GONE);
         toolbar.setTitle(title);
+    }
+
+    public void showBackBtn(boolean showBackBtn) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(showBackBtn);
+            getSupportActionBar().setDisplayShowHomeEnabled(showBackBtn);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
     }
 
     @Override

@@ -12,11 +12,14 @@ import android.widget.Toast;
 import com.abrsoftware.speeddytest.MainActivity;
 import com.abrsoftware.speeddytest.R;
 import com.abrsoftware.speeddytest.ResponsiveUIstate;
+import com.abrsoftware.speeddytest.view.BaseView;
 import com.abrsoftware.speeddytest.view.LoginView.LoginMVP.LoginMVP;
 import com.abrsoftware.speeddytest.view.LoginView.LoginMVP.LoginPresenterImp;
 
+import butterknife.ButterKnife;
 
-public class LoginView extends Fragment implements LoginMVP.View {
+
+public class LoginView extends BaseView implements LoginMVP.View {
 
     public LoginPresenterImp presenterImp;
     public View rootView;
@@ -66,8 +69,13 @@ public class LoginView extends Fragment implements LoginMVP.View {
     }
 
     @Override
-    public void showLoading() {
-
+    public void showLoading(boolean show) {
+        if (show) {
+            inflateCustomDialog(R.layout.loading);
+            showCustomDialog();
+        } else {
+            hiddeCustomDialog();
+        }
     }
 
     @Override

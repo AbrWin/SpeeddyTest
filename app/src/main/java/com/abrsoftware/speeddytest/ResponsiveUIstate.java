@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.abrsoftware.speeddytest.view.LoginView.LoginView;
-import com.abrsoftware.speeddytest.view.detailBrand.DetailBrandView;
+import com.abrsoftware.speeddytest.view.detailNews.DetailNewsView;
 import com.abrsoftware.speeddytest.view.homeView.HomeView;
 import com.abrsoftware.speeddytest.view.thankyou.ThankYouView;
 
@@ -27,10 +27,10 @@ public enum ResponsiveUIstate {
             return setNewFragment(activity, R.id.fragment_container, HomeView.class);
         }
     },
-    DETAILBRAND() {
+    DETAILNEWS() {
         @Override
         public Fragment execute(MainActivity activity) {
-            return setNewFragment(activity, R.id.fragment_container, DetailBrandView.class);
+            return setNewFragment(activity, R.id.fragment_container, DetailNewsView.class);
         }
     },
     THANK_YOU() {

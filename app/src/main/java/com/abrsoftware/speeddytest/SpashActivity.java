@@ -18,7 +18,7 @@ public class SpashActivity extends AppCompatActivity {
                 handler.removeCallbacks(this);
                 initMain();
             }
-        }, 1500);
+        }, 700);
     }
 
     private void initMain() {

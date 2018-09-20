@@ -9,7 +9,7 @@ import com.abrsoftware.speeddytest.view.GeneralEvent;
 public class LoginMVP {
 
     public interface View {
-        void showLoading();
+        void showLoading(boolean show);
 
         void showMsj(String msj);
 

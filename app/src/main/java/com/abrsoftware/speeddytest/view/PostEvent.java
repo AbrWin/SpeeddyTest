@@ -1,5 +1,6 @@
 package com.abrsoftware.speeddytest.view;
 import com.abrsoftware.speeddytest.helper.GreenRoboHelper;
+import com.abrsoftware.speeddytest.view.homeView.HomeMVP.NewsResponce;
 
 /**
  * Created by AbrWin on 29/1017.
@@ -41,6 +42,13 @@ public class PostEvent {
         GeneralEvent loginEvent = new GeneralEvent();
         loginEvent.setEventType(type);
         loginEvent.setStatusCode(status);
+        eventBus.post(loginEvent);
+    }
+
+    public void postEventResponce(int type, NewsResponce responce) {
+        GeneralEvent loginEvent = new GeneralEvent();
+        loginEvent.setEventType(type);
+        loginEvent.setResponce(responce);
         eventBus.post(loginEvent);
     }
 

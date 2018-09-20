@@ -43,13 +43,19 @@ public class LoginPresenterImp implements LoginMVP.Presenter {
     public void onEventMainThread(GeneralEvent event) {
         if (event != null) {
             switch (event.getEventType()) {
+                case GeneralEvent.showLoading:
+                    cAccountView.showLoading(true);
+                    break;
                 case GeneralEvent.onShowMsjError:
+                    cAccountView.showLoading(false);
                     cAccountView.showMsj(event.getErrorMessage());
                     break;
                 case GeneralEvent.onSignInError:
+                    cAccountView.showLoading(false);
                     cAccountView.showMsj(event.getErrorMessage());
                     break;
                 case GeneralEvent.onSignInSuccess:
+                    cAccountView.showLoading(false);
                     cAccountView.succesUser();
                     break;
             }

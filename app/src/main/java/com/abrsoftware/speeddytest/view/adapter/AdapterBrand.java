@@ -1,15 +1,21 @@
 package com.abrsoftware.speeddytest.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.abrsoftware.speeddytest.MyApplication;
 import com.abrsoftware.speeddytest.R;
 import com.abrsoftware.speeddytest.model.Brand;
+import com.abrsoftware.speeddytest.model.News;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
@@ -18,10 +24,10 @@ import java.util.List;
  */
 
 public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder> {
-    private List<Brand> brandList;
+    private List<News> brandList;
     private onItemClickListener listener;
 
-    public AdapterBrand(List<Brand> brandList, onItemClickListener listener) {
+    public AdapterBrand(List<News> brandList, onItemClickListener listener) {
         this.brandList = brandList;
         this.listener = listener;
     }
@@ -34,22 +40,14 @@ public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder>
 
     @Override
     public void onBindViewHolder(final BrandHolder holder, int position) {
-        holder.singleBrand = brandList.get(position);
-        holder.nameBran.setText(holder.singleBrand.getName());
-        holder.resume.setText(holder.singleBrand.getResume());
-        if (holder.singleBrand.isChecked()) {
-            holder.checkBox.setChecked(true);
+        holder.singleNew = brandList.get(position);
+        holder.nameBran.setText(holder.singleNew.getTitle());
+        holder.resume.setText(holder.singleNew.getDescription());
+        if (holder.singleNew != null && !TextUtils.isEmpty(holder.singleNew.getUrlImagen())){
+            Glide.with(MyApplication.getCtx())
+                    .load(holder.singleNew.getUrlImagen()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.RESULT).into(holder.img);
         }
-        holder.checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.checkBox.isChecked()) {
-                    listener.onItemCheck(holder);
-                } else {
-                    listener.onItemUncheck(holder);
-                }
-            }
-        });
+
     }
 
     @Override
@@ -60,14 +58,13 @@ public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder>
     public class BrandHolder extends RecyclerView.ViewHolder implements AdapterView.OnClickListener {
         private TextView nameBran;
         private TextView resume;
-        public CheckBox checkBox;
-        public Brand singleBrand;
-
+        private ImageView img;
+        public News singleNew;
         public BrandHolder(View itemView) {
             super(itemView);
-            nameBran = itemView.findViewById(R.id.nameBrand);
-            resume = itemView.findViewById(R.id.resumeBrand);
-            checkBox = itemView.findViewById(R.id.checkBox);
+            nameBran = itemView.findViewById(R.id.title);
+            resume = itemView.findViewById(R.id.description);
+            img = itemView.findViewById(R.id.imgNews);
             itemView.setOnClickListener(this);
 
         }
