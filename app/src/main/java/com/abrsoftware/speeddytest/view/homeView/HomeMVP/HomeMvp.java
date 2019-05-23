@@ -15,9 +15,7 @@ public class HomeMvp {
     }
 
     interface Presenter {
-        void getNewsEs();
-
-        void getNewsEn();
+        void getQuotes();
 
         void oncreate();
 
@@ -28,8 +26,6 @@ public class HomeMvp {
     }
 
     interface Repository{
-        void getNewsEs();
-
-        void getNewsEn();
+        void getQuotes();
     }
 }

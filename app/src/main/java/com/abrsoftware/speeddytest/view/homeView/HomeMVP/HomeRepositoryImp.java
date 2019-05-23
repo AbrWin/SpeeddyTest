@@ -7,6 +7,11 @@ import com.abrsoftware.speeddytest.service.ApiServiceSingleton;
 import com.abrsoftware.speeddytest.utils.Connectivity;
 import com.abrsoftware.speeddytest.view.GeneralEvent;
 import com.abrsoftware.speeddytest.view.PostEvent;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -23,57 +28,19 @@ public class HomeRepositoryImp extends PostEvent implements HomeMvp.Repository{
         apiService = ApiServiceSingleton.apiServiceHolder.apiService;
         this.gson = new Gson();
     }
-    @Override
-    public void getNewsEs() {
-        if (!Connectivity.isOnline(MyApplication.getCtx())) {
-            postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_connec));
-            return;
-        }
-        postEvent(GeneralEvent.showLoading);
-        apiService.apiClient.getNewsEs().enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if(response.isSuccessful()){
-                        NewsResponce responce = gson.fromJson(response.body(), NewsResponce.class);
-                        postEventResponce(GeneralEvent.SuccesGetNews, responce);
-                }else {
-                    postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_connec));
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                postEvent(GeneralEvent.ErrorGetNews, MyApplication.getCtx().getString(R.string.error_connec));
-            }
-        });
-    }
 
     @Override
-    public void getNewsEn() {
-        if (!Connectivity.isOnline(MyApplication.getCtx())) {
-            postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_connec));
-            return;
-        }
-        postEvent(GeneralEvent.showLoading);
-        apiService.apiClient.getNewsEn().enqueue(new Callback<String>() {
+    public void getQuotes() {
+        final Query query = FirebaseDatabase.getInstance().getReference().child("author");
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if(response.isSuccessful()){
-                    if(response.isSuccessful()){
-                        NewsResponce responce = gson.fromJson(response.body(), NewsResponce.class);
-                        postEventResponce(GeneralEvent.SuccesGetNews, responce);
-                    }else {
-                        postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_connec));
-                    }
-                }else {
-                    postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_connec));
-                }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dataSnapshot.exists();
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                postEvent(GeneralEvent.ErrorGetNews, MyApplication.getCtx().getString(R.string.error_connec));
+            public void onCancelled(DatabaseError databaseError) {
+                databaseError.getMessage();
             }
         });
     }

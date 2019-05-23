@@ -19,6 +19,11 @@ public class HomePresenterImp implements HomeMvp.Presenter {
     }
 
     @Override
+    public void getQuotes() {
+        repository.getQuotes();
+    }
+
+    @Override
     public void oncreate() {
         eventbus.register(this);
     }
@@ -26,16 +31,6 @@ public class HomePresenterImp implements HomeMvp.Presenter {
     @Override
     public void ondestroy() {
         eventbus.unregister(this);
-    }
-
-    @Override
-    public void getNewsEs() {
-        repository.getNewsEs();
-    }
-
-    @Override
-    public void getNewsEn() {
-        repository.getNewsEn();
     }
 
     @Subscribe

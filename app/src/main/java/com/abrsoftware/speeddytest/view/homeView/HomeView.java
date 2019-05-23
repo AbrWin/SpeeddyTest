@@ -48,7 +48,7 @@ public class HomeView extends BaseView implements HomeMvp.View, AdapterBrand.onI
             lisInView(newList);
         }else {
 
-            presenter.getNewsEs();
+            presenter.getQuotes();
         }
 
         changeEs();
