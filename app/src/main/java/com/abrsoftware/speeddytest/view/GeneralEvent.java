@@ -3,7 +3,7 @@ package com.abrsoftware.speeddytest.view;
 import com.abrsoftware.speeddytest.view.homeView.HomeMVP.NewsResponce;
 
 /**
- * Created by AbrWin on 29/10/17.
+ * Created by AbrWin on 23/05/19.
  */
 
 public class GeneralEvent {

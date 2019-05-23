@@ -20,7 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 /**
- * Created by AbrWin on 29/10/17.
+ * Created by AbrWin on 23/05/19.
  */
 
 public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder> {

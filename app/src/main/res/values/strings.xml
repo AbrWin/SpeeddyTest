@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Telmex News</string>
+    <string name="app_name">Qoutes</string>
     <string name="title_activity_spash">SpashActivity</string>
     <string name="speddytest">SpeddyTest</string>
     <string name="enter_user">Enter your user</string>

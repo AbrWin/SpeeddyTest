@@ -3,7 +3,7 @@ package com.abrsoftware.speeddytest.model;
 import java.io.Serializable;
 
 /**
- * Created by AbrWin on 29/10/17.
+ * Created by AbrWin on 23/05/19.
  */
 
 public class Brand implements Serializable{

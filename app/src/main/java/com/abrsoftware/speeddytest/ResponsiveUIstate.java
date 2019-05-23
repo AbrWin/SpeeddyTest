@@ -11,7 +11,7 @@ import com.abrsoftware.speeddytest.view.homeView.HomeView;
 import com.abrsoftware.speeddytest.view.thankyou.ThankYouView;
 
 /**
- * Created by AbrWin on 29/10/17.
+ * Created by AbrWin on 23/05/19.
  */
 
 public enum ResponsiveUIstate {

@@ -3,7 +3,7 @@ import com.abrsoftware.speeddytest.helper.GreenRoboHelper;
 import com.abrsoftware.speeddytest.view.homeView.HomeMVP.NewsResponce;
 
 /**
- * Created by AbrWin on 29/1017.
+ * Created by AbrWin on 23/05/19.
  */
 
 public class PostEvent {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBack"
+    android:background="@android:color/white"
     tools:context="com.abrsoftware.speeddytest.SpashActivity">
 
 
@@ -19,12 +19,12 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="@string/app_name"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto_thin"
-        android:textColor="@android:color/white"
+        android:text="@string/app_name"
+        android:textColor="@android:color/black"
         android:textSize="45sp"
         android:textStyle="bold"
         android:theme="@style/AppTheme.ProgressBar"
@@ -41,11 +41,8 @@
         android:ems="10"
         android:fontFamily="@font/roboto_thin"
         android:hint="@string/enter_user"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:maxLines="1"
-        android:textColor="@android:color/white"
-        android:theme="@style/AppTheme.ProgressBar"
-        android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
@@ -58,13 +55,10 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/form_input"
         android:ems="10"
+        android:fontFamily="@font/roboto_thin"
         android:hint="@string/enter_password"
         android:inputType="textPassword"
         android:maxLines="1"
-        android:fontFamily="@font/roboto_thin"
-        android:textColor="@android:color/white"
-        android:theme="@style/AppTheme.ProgressBar"
-        android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/inputUser" />
@@ -89,9 +83,9 @@
         android:layout_width="200dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/colorBtn"
@@ -124,16 +118,16 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:srcCompat="@drawable/ic_smartphone" />
+        app:srcCompat="@drawable/ic_greek" />
 
 
 </android.support.constraint.ConstraintLayout>
