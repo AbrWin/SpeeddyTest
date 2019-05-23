@@ -26,7 +26,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ResponsiveUIstate state;
     private Toolbar toolbar;
     private TelephonyManager tMgr;
     private Bundle bundle;

@@ -7,12 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.abrsoftware.speeddytest.MainActivity;
 import com.abrsoftware.speeddytest.R;
-import com.abrsoftware.speeddytest.ResponsiveUIstate;
 import com.abrsoftware.speeddytest.model.News;
 import com.abrsoftware.speeddytest.view.BaseView;
 import com.abrsoftware.speeddytest.view.adapter.AdapterBrand;
