@@ -1,10 +1,10 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBack"
+
     tools:context="com.abrsoftware.speeddytest.view.homeView.HomeView">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,10 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="@string/my_home"
-        android:textColor="@android:color/white"
         android:fontFamily="@font/roboto_thin"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,55 +24,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
-        android:id="@+id/btnAccept"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/form_btn"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/spanish"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerBrands"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnAccept"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_news" />
 
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/form_btn"
-        android:text="@string/english"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

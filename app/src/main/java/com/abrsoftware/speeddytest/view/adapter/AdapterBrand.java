@@ -1,18 +1,16 @@
 package com.abrsoftware.speeddytest.view.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abrsoftware.speeddytest.MyApplication;
 import com.abrsoftware.speeddytest.R;
-import com.abrsoftware.speeddytest.model.Brand;
 import com.abrsoftware.speeddytest.model.News;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;

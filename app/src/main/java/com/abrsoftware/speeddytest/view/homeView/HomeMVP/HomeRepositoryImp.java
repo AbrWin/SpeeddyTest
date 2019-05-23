@@ -44,7 +44,7 @@ public class HomeRepositoryImp extends PostEvent implements HomeMvp.Repository{
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_connec));
+                postEvent(GeneralEvent.ErrorGetNews, MyApplication.getCtx().getString(R.string.error_connec));
             }
         });
     }
@@ -73,7 +73,7 @@ public class HomeRepositoryImp extends PostEvent implements HomeMvp.Repository{
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_connec));
+                postEvent(GeneralEvent.ErrorGetNews, MyApplication.getCtx().getString(R.string.error_connec));
             }
         });
     }

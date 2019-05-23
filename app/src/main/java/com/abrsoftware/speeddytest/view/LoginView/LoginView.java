@@ -1,38 +1,25 @@
 package com.abrsoftware.speeddytest.view.LoginView;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.abrsoftware.speeddytest.MainActivity;
 import com.abrsoftware.speeddytest.R;
-import com.abrsoftware.speeddytest.ResponsiveUIstate;
 import com.abrsoftware.speeddytest.view.BaseView;
 import com.abrsoftware.speeddytest.view.LoginView.LoginMVP.LoginMVP;
 import com.abrsoftware.speeddytest.view.LoginView.LoginMVP.LoginPresenterImp;
-
-import butterknife.ButterKnife;
+import com.abrsoftware.speeddytest.view.homeView.HomeView;
 
 
 public class LoginView extends BaseView implements LoginMVP.View {
 
     public LoginPresenterImp presenterImp;
     public View rootView;
-
-    public LoginView() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +29,7 @@ public class LoginView extends BaseView implements LoginMVP.View {
         final EditText user = rootView.findViewById(R.id.inputUser);
         final EditText password = rootView.findViewById(R.id.inputPassword);
 
-        CardView btnLogin = rootView.findViewById(R.id.btn_login);
+        Button btnLogin = rootView.findViewById(R.id.btn_login);
         presenterImp = new LoginPresenterImp(this);
         presenterImp.oncreate();
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +78,6 @@ public class LoginView extends BaseView implements LoginMVP.View {
 
     @Override
     public void succesUser() {
-        ((MainActivity) getActivity()).changeFragment(ResponsiveUIstate.HOME);
+        ((MainActivity) getActivity()).changeFragment(HomeView.class, null);
     }
 }

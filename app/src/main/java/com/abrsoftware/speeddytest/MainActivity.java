@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ResponsiveUIstate state;
     private Toolbar toolbar;
     private TelephonyManager tMgr;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +41,28 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ApiServiceSingleton.getInstance().apiService.initApiService();
         if (FirebaseHelper.getInstance().getAuthReference().getCurrentUser() == null) {
-            changeFragment(ResponsiveUIstate.LOGIN);
+            changeFragment(LoginView.class, null);
         } else {
-            changeFragment(ResponsiveUIstate.HOME);
+            changeFragment(HomeView.class, null);
         }
     }
 
 
 
-    public void changeFragment(ResponsiveUIstate responsiveUIstate) {
-        this.state = ResponsiveUIstate.setState(responsiveUIstate);
-        this.state.execute(this);
+    public void changeFragment(Class<? extends Fragment> fragmentClass, Bundle bundle) {
+        try {
+            Fragment fragment = fragmentClass.newInstance();
+            if (bundle != null) {
+                fragment.setArguments(bundle);
+            }
+            FragmentManager manager = this.getSupportFragmentManager();
+            FragmentTransaction tx = manager.beginTransaction();
+            tx.replace(R.id.fragment_container, fragment, fragmentClass.getCanonicalName());
+            tx.addToBackStack(null);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void showToolbar(boolean show, String title) {
@@ -121,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                changeFragment(ResponsiveUIstate.LOGIN);
+                changeFragment(LoginView.class, null);
                 break;
         }
         return super.onOptionsItemSelected(item);

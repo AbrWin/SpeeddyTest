@@ -3,9 +3,9 @@ package com.abrsoftware.speeddytest.view.thankyou;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.abrsoftware.speeddytest.MainActivity;
 import com.abrsoftware.speeddytest.R;
 import com.abrsoftware.speeddytest.ResponsiveUIstate;
+import com.abrsoftware.speeddytest.view.homeView.HomeView;
 
 
 public class ThankYouView extends Fragment implements MainActivity.onResult {
@@ -48,7 +49,7 @@ public class ThankYouView extends Fragment implements MainActivity.onResult {
         goHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) getActivity()).changeFragment(ResponsiveUIstate.HOME);
+                ((MainActivity) getActivity()).changeFragment(HomeView.class, null);
             }
         });
 
