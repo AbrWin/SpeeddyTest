@@ -1,17 +1,17 @@
 package com.abrsoftware.speeddytest.view.homeView;
 
 import android.os.Bundle;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.abrsoftware.speeddytest.MainActivity;
 import com.abrsoftware.speeddytest.R;
-import com.abrsoftware.speeddytest.model.News;
+import com.abrsoftware.speeddytest.model.Qoute;
 import com.abrsoftware.speeddytest.view.BaseView;
 import com.abrsoftware.speeddytest.view.adapter.AdapterBrand;
 import com.abrsoftware.speeddytest.view.detailNews.DetailNewsView;
@@ -24,7 +24,7 @@ public class HomeView extends BaseView implements HomeMvp.View, AdapterBrand.onI
 
     private View rootView;
     private AdapterBrand adapterBrand;
-    private List<News> newList;
+    private List<Qoute> qouteList;
     private LinearLayoutManager linearLayout;
     private RecyclerView recyclerBrands;
     private HomePresenterImp presenter;
@@ -44,15 +44,13 @@ public class HomeView extends BaseView implements HomeMvp.View, AdapterBrand.onI
         recyclerBrands = rootView.findViewById(R.id.recyclerBrands);
         presenter = new HomePresenterImp(this);
         presenter.oncreate();
-        if (newList != null && newList.size() > 0){
-            lisInView(newList);
+        if (qouteList != null && qouteList.size() > 0) {
+            lisInView(qouteList);
         }else {
 
             presenter.getQuotes();
         }
 
-        changeEs();
-        changeEn();
         return rootView;
     }
 
@@ -71,9 +69,9 @@ public class HomeView extends BaseView implements HomeMvp.View, AdapterBrand.onI
 
     @Override
     public void onClickRecipe(AdapterBrand.BrandHolder itemHolder) {
-        News news = itemHolder.singleNew;
+        Qoute qoute = itemHolder.qoute;
         Bundle bundle = new Bundle();
-        bundle.putSerializable("news", news);
+        bundle.putSerializable("qoute", qoute);
         ((MainActivity) getActivity()).changeFragment(DetailNewsView.class, null);
     }
 
@@ -99,27 +97,19 @@ public class HomeView extends BaseView implements HomeMvp.View, AdapterBrand.onI
     }
 
     @Override
-    public void succesGetNews(List<News> news) {
+    public void succesGetQoutes(List<Qoute> qouteList) {
 
-        if(news.size() > 0){
-            lisInView(news);
+        if (qouteList.size() > 0) {
+            lisInView(qouteList);
         }
     }
 
-    private void lisInView(List<News> news) {
-        newList = news;
-        adapterBrand = new AdapterBrand(news, this);
+    private void lisInView(List<Qoute> qoute) {
+        qouteList = qoute;
+        adapterBrand = new AdapterBrand(qoute, this);
         recyclerBrands.setLayoutManager(linearLayout);
         recyclerBrands.setAdapter(adapterBrand);
         adapterBrand.notifyDataSetChanged();
-    }
-
-    private void changeEn() {
-
-    }
-
-    private void changeEs() {
-
     }
 
     @Override

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.abrsoftware.speeddytest.MyApplication;
 import com.abrsoftware.speeddytest.R;
-import com.abrsoftware.speeddytest.model.News;
+import com.abrsoftware.speeddytest.model.Qoute;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -22,11 +22,11 @@ import java.util.List;
  */
 
 public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder> {
-    private List<News> brandList;
+    private List<Qoute> qouteList;
     private onItemClickListener listener;
 
-    public AdapterBrand(List<News> brandList, onItemClickListener listener) {
-        this.brandList = brandList;
+    public AdapterBrand(List<Qoute> qouteList, onItemClickListener listener) {
+        this.qouteList = qouteList;
         this.listener = listener;
     }
 
@@ -38,26 +38,26 @@ public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder>
 
     @Override
     public void onBindViewHolder(final BrandHolder holder, int position) {
-        holder.singleNew = brandList.get(position);
-        holder.nameBran.setText(holder.singleNew.getTitle());
-        holder.resume.setText(holder.singleNew.getDescription());
-        if (holder.singleNew != null && !TextUtils.isEmpty(holder.singleNew.getUrlImagen())){
+        holder.qoute = qouteList.get(position);
+        holder.nameBran.setText("\""+holder.qoute.getQuote()+"\"");
+        holder.resume.setText(holder.qoute.getAuthor());
+        if (holder.qoute != null && !TextUtils.isEmpty(holder.qoute.getImg())){
             Glide.with(MyApplication.getCtx())
-                    .load(holder.singleNew.getUrlImagen()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.RESULT).into(holder.img);
+                    .load(holder.qoute.getImg()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.RESULT).into(holder.img);
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return brandList != null && brandList.size() > 0 ? brandList.size() : 0;
+        return qouteList != null && qouteList.size() > 0 ? qouteList.size() : 0;
     }
 
     public class BrandHolder extends RecyclerView.ViewHolder implements AdapterView.OnClickListener {
         private TextView nameBran;
         private TextView resume;
         private ImageView img;
-        public News singleNew;
+        public Qoute qoute;
         public BrandHolder(View itemView) {
             super(itemView);
             nameBran = itemView.findViewById(R.id.title);

@@ -8,11 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.abrsoftware.speeddytest.MainActivity;
 import com.abrsoftware.speeddytest.MyApplication;
 import com.abrsoftware.speeddytest.R;
-import com.abrsoftware.speeddytest.model.News;
+import com.abrsoftware.speeddytest.model.Qoute;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -33,11 +32,11 @@ public class DetailNewsView extends Fragment {
         imgDeatil = rootView.findViewById(R.id.imgDatailNews);
 
         if (getArguments() != null) {
-            News news = (News) getArguments().getSerializable("news");
-            nameBrand.setText(news.getTitle());
-            resumeBrand.setText(Html.fromHtml(news.getText()));
+            Qoute qoute = (Qoute) getArguments().getSerializable("news");
+            nameBrand.setText(qoute.getQuote());
+            resumeBrand.setText(Html.fromHtml(qoute.getAuthor()));
             Glide.with(MyApplication.getCtx())
-                    .load(news.getUrlImagenHD()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.RESULT).into(imgDeatil);
+                    .load(qoute.getImg()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.RESULT).into(imgDeatil);
         }
 
 

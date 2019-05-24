@@ -1,6 +1,8 @@
 package com.abrsoftware.speeddytest.view;
 import com.abrsoftware.speeddytest.helper.GreenRoboHelper;
-import com.abrsoftware.speeddytest.view.homeView.HomeMVP.NewsResponce;
+import com.abrsoftware.speeddytest.model.Qoute;
+import java.util.List;
+
 
 /**
  * Created by AbrWin on 23/05/19.
@@ -8,10 +10,12 @@ import com.abrsoftware.speeddytest.view.homeView.HomeMVP.NewsResponce;
 
 public class PostEvent {
 
+    private final GeneralEvent loginEvent;
     public GreenRoboHelper eventBus;
 
     public PostEvent() {
         this.eventBus = GreenRoboHelper.getInstance();
+        loginEvent = new GeneralEvent();
     }
 
     /**
@@ -20,7 +24,7 @@ public class PostEvent {
      * @param type
      */
     public void postEvent(int type) {
-        postEvent(type, null);
+        postEvent(type, "");
     }
 
     /**
@@ -45,8 +49,7 @@ public class PostEvent {
         eventBus.post(loginEvent);
     }
 
-    public void postEventResponce(int type, NewsResponce responce) {
-        GeneralEvent loginEvent = new GeneralEvent();
+    public void postEvent(int type, List<Qoute> responce) {
         loginEvent.setEventType(type);
         loginEvent.setResponce(responce);
         eventBus.post(loginEvent);

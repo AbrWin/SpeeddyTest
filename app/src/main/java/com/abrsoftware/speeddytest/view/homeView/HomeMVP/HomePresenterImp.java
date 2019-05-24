@@ -41,14 +41,14 @@ public class HomePresenterImp implements HomeMvp.Presenter {
         }
 
         switch (event.eventType) {
-            case GeneralEvent.showLoading:
+            case GeneralEvent.SHOW_LOADING:
                 view.showLoading(true);
                 break;
-            case GeneralEvent.SuccesGetNews:
+            case GeneralEvent.SUCCES_RESPONCE:
                 view.showLoading(false);
-                view.succesGetNews(event.getResponce().getNews());
+                view.succesGetQoutes(event.getResponce());
                 break;
-            case GeneralEvent.ErrorGetNews:
+            case GeneralEvent.ERROR_GET_NEWS:
                 view.showLoading(false);
                 view.showMsj(event.getErrorMessage());
                 break;

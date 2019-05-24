@@ -32,7 +32,7 @@ public class LoginRepositoryImp extends PostEvent implements LoginMVP.Repository
     @Override
     public void doSingIn(String email, String password) {
         if (!Connectivity.isOnline(MyApplication.getCtx())) {
-            postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_connec));
+            postEvent(GeneralEvent.ON_SHOW_MSJ_ERROR, MyApplication.getCtx().getString(R.string.error_connec));
             return;
         }
 
@@ -42,11 +42,11 @@ public class LoginRepositoryImp extends PostEvent implements LoginMVP.Repository
         }
 
         if (TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_mail));
+            postEvent(GeneralEvent.ON_SHOW_MSJ_ERROR, MyApplication.getCtx().getString(R.string.error_mail));
         } else if (TextUtils.isEmpty(password)) {
-            postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_password));
+            postEvent(GeneralEvent.ON_SHOW_MSJ_ERROR, MyApplication.getCtx().getString(R.string.error_password));
         } else {
-            postEvent(GeneralEvent.showLoading);
+            postEvent(GeneralEvent.SHOW_LOADING);
             doSingInUser(email, password);
         }
     }
@@ -54,10 +54,10 @@ public class LoginRepositoryImp extends PostEvent implements LoginMVP.Repository
     public boolean isGooglePlayServicesAvaliable(Context context) {
         int statusCode = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
         if (GoogleApiAvailability.getInstance().isUserResolvableError(statusCode)) {
-            postEvent(GeneralEvent.onBeUserResolvableError, statusCode);
+            postEvent(GeneralEvent.ON_BE_USER_RESOLVABLE_ERROR, statusCode);
             return false;
         } else if (statusCode != ConnectionResult.SUCCESS) {
-            postEvent(GeneralEvent.onGooglePlayServicesFailed);
+            postEvent(GeneralEvent.ON_GOOGLE_PLAY_SERVICES_FAILED);
             return false;
         }
         return true;
@@ -68,9 +68,9 @@ public class LoginRepositoryImp extends PostEvent implements LoginMVP.Repository
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()) {
-                    postEvent(GeneralEvent.onShowMsjError, MyApplication.getCtx().getString(R.string.error_mail));
+                    postEvent(GeneralEvent.ON_SHOW_MSJ_ERROR, MyApplication.getCtx().getString(R.string.error_mail));
                 } else {
-                    postEvent(GeneralEvent.onSignInSuccess);
+                    postEvent(GeneralEvent.ON_SIGN_IN_SUCCESS);
                 }
             }
         });

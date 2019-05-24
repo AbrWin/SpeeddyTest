@@ -1,30 +1,28 @@
 package com.abrsoftware.speeddytest.view;
 
-import com.abrsoftware.speeddytest.view.homeView.HomeMVP.NewsResponce;
+import com.abrsoftware.speeddytest.model.Qoute;
+
+import java.util.List;
 
 /**
  * Created by AbrWin on 23/05/19.
  */
 
 public class GeneralEvent {
-    public final static int onSignUpError = 1;
-    public final static int onBeUserResolvableError = 2;
-    public final static int onGooglePlayServicesFailed = 3;
-    public final static int onShowMsjError = 4;
-    public final static int onSignUpSuccess = 7;
-    public final static int onCompleteDataUser = 8;
-    public final static int onSignInSuccess = 9;
-    public final static int onSignInError = 10;
-    public final static int onErrorDataBase = 11;
-    public final static int GeneralError = 12;
-    public final static int SuccesGetNews = 13;
-    public final static int ErrorGetNews = 14;
-    public final static int showLoading = 15;
+    public final static int SUCCES_RESPONCE = 1;
+    public final static int ERROR_RESPONCE = 2;
+    public final static int ON_BE_USER_RESOLVABLE_ERROR = 3;
+    public final static int ON_GOOGLE_PLAY_SERVICES_FAILED = 4;
+    public final static int ON_SHOW_MSJ_ERROR = 5;
+    public final static int ON_SIGN_IN_SUCCESS = 6;
+    public final static int ON_SIGN_IN_ERROR = 7;
+    public final static int ERROR_GET_NEWS = 8;
+    public final static int SHOW_LOADING = 9;
 
     public int eventType;
     public String errorMessage;
     public int statusCode;
-    public NewsResponce responce;
+    public List<Qoute> responce;
 
     public int getEventType() {
         return eventType;
@@ -46,11 +44,11 @@ public class GeneralEvent {
         this.statusCode = statusCode;
     }
 
-    public NewsResponce getResponce() {
+    public List<Qoute> getResponce() {
         return responce;
     }
 
-    public void setResponce(NewsResponce responce) {
+    public void setResponce(List<Qoute> responce) {
         this.responce = responce;
     }
 }
