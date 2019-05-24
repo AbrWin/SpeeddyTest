@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBack">
+    android:background="@android:color/darker_gray">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -27,11 +27,8 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitCenter"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -49,25 +46,22 @@
                     android:id="@+id/nameBrand"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
                     android:ellipsize="end"
+                    android:fontFamily="@font/roboto_thin"
                     android:maxLines="12"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@android:color/white"
-                    android:textSize="25sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imgDatailNews"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0"
-                    tools:text="Samsung Galaxy SIII" />
-
-
-
-
+                    app:layout_constraintVertical_bias="0.5" />
 
 
                 <androidx.constraintlayout.widget.Guideline
@@ -85,44 +79,30 @@
                 android:id="@+id/lineView"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
-            <ScrollView
+            <TextView
+                android:id="@+id/description"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lineView">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/description"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/roboto_thin"
-                        android:textSize="20sp"
-
-                        tools:text="Es reconozida por lograr, Es reconozida por lograr, Es reconozida por lograr" />
-
-                </LinearLayout>
-            </ScrollView>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="@string/welcome" />
 
 
         </LinearLayout>
-
 
 
     </androidx.cardview.widget.CardView>

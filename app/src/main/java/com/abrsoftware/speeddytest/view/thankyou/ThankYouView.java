@@ -17,7 +17,7 @@ import com.abrsoftware.speeddytest.R;
 import com.abrsoftware.speeddytest.view.homeView.HomeView;
 
 
-public class ThankYouView extends Fragment implements MainActivity.onResult {
+public class ThankYouView extends Fragment {
 
     private View rootView;
     private int REQUEST_READ_PHONE_STATE = 1;
@@ -41,7 +41,7 @@ public class ThankYouView extends Fragment implements MainActivity.onResult {
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
         } else {
-            String number = ((MainActivity) getActivity()).gettMgr().getLine1Number();
+            String number = "";
             String numberText = getString(R.string.tu_msisdn_es) + " " + number;
             numberPhone.setText(numberText);
         }
@@ -53,11 +53,5 @@ public class ThankYouView extends Fragment implements MainActivity.onResult {
         });
 
         return rootView;
-    }
-
-
-    @Override
-    public void onResultActivity(String number) {
-        numberPhone.setText(number);
     }
 }

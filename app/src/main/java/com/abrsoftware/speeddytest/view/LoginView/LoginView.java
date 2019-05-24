@@ -15,31 +15,32 @@ import com.abrsoftware.speeddytest.view.LoginView.LoginMVP.LoginMVP;
 import com.abrsoftware.speeddytest.view.LoginView.LoginMVP.LoginPresenterImp;
 import com.abrsoftware.speeddytest.view.homeView.HomeView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 public class LoginView extends BaseView implements LoginMVP.View {
 
     public LoginPresenterImp presenterImp;
     public View rootView;
 
+    @BindView(R.id.inputUser)
+    public EditText user;
+
+    @BindView(R.id.inputPassword)
+    public EditText password;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.view_login, container, false);
-        final EditText user = rootView.findViewById(R.id.inputUser);
-        final EditText password = rootView.findViewById(R.id.inputPassword);
-
-        Button btnLogin = rootView.findViewById(R.id.btn_login);
+        ButterKnife.bind(this, rootView);
         presenterImp = new LoginPresenterImp(this);
         presenterImp.oncreate();
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String emailTxt = user.getText().toString().trim();
-                final String passwordTxt = password.getText().toString().trim();
-                presenterImp.loginUser(emailTxt, passwordTxt);
-            }
-        });
+
         return rootView;
     }
 
@@ -53,6 +54,13 @@ public class LoginView extends BaseView implements LoginMVP.View {
     public void onDestroyView() {
         super.onDestroyView();
         presenterImp.ondestroy();
+    }
+
+    @OnClick(R.id.btn_login)
+    public void initlogin() {
+        final String emailTxt = user.getText().toString().trim();
+        final String passwordTxt = password.getText().toString().trim();
+        presenterImp.loginUser(emailTxt, passwordTxt);
     }
 
     @Override

@@ -12,22 +12,11 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 public class HomeRepositoryImp extends PostEvent implements HomeMvp.Repository{
-
-    private final String TAG = HomeRepositoryImp.class.getName();
-    private ApiService apiService;
-    private Gson gson;
-
-    public HomeRepositoryImp() {
-        apiService = ApiServiceSingleton.apiServiceHolder.apiService;
-        this.gson = new Gson();
-    }
 
     @Override
     public void getQuotes() {

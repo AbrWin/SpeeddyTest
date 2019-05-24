@@ -53,6 +53,5 @@ public class HomePresenterImp implements HomeMvp.Presenter {
                 view.showMsj(event.getErrorMessage());
                 break;
         }
-
     }
 }

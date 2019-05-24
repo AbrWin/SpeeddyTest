@@ -14,9 +14,9 @@ import com.abrsoftware.speeddytest.R;
 import com.abrsoftware.speeddytest.model.Qoute;
 import com.abrsoftware.speeddytest.view.BaseView;
 import com.abrsoftware.speeddytest.view.adapter.AdapterBrand;
-import com.abrsoftware.speeddytest.view.detailNews.DetailNewsView;
 import com.abrsoftware.speeddytest.view.homeView.HomeMVP.HomeMvp;
 import com.abrsoftware.speeddytest.view.homeView.HomeMVP.HomePresenterImp;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
 
@@ -28,6 +28,8 @@ public class HomeView extends BaseView implements HomeMvp.View, AdapterBrand.onI
     private LinearLayoutManager linearLayout;
     private RecyclerView recyclerBrands;
     private HomePresenterImp presenter;
+    private BottomSheetDialog bottomSheetDialog;
+    private Bundle bundle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class HomeView extends BaseView implements HomeMvp.View, AdapterBrand.onI
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.view_home, container, false);
-
+        bundle = new Bundle();
 
         linearLayout = new LinearLayoutManager(getContext());
         recyclerBrands = rootView.findViewById(R.id.recyclerBrands);
@@ -46,7 +48,7 @@ public class HomeView extends BaseView implements HomeMvp.View, AdapterBrand.onI
         presenter.oncreate();
         if (qouteList != null && qouteList.size() > 0) {
             lisInView(qouteList);
-        }else {
+        } else {
 
             presenter.getQuotes();
         }
@@ -64,26 +66,20 @@ public class HomeView extends BaseView implements HomeMvp.View, AdapterBrand.onI
     public void onResume() {
         super.onResume();
         ((MainActivity) getActivity()).showBackBtn(false);
-        ((MainActivity) getActivity()).showToolbar(true, "Bienvenido");
+        ((MainActivity) getActivity()).showToolbar(true, getString(R.string.welcome));
     }
 
     @Override
-    public void onClickRecipe(AdapterBrand.BrandHolder itemHolder) {
-        Qoute qoute = itemHolder.qoute;
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("qoute", qoute);
-        ((MainActivity) getActivity()).changeFragment(DetailNewsView.class, null);
-    }
+    public void onClickContext(AdapterBrand.BrandHolder itemHolder) {
+        if(itemHolder.qoute != null){
+            ((MainActivity)getActivity()).inflateBottomSheet(R.layout.bottom_menu, R.style.BottomSheetDialogContext);
+            ((MainActivity)getActivity()).showBottomSheet();
 
-    @Override
-    public void onItemCheck(AdapterBrand.BrandHolder item) {
-        //item.singleBrand.setChecked(true);
-       // newList.add(item.singleBrand);
-    }
+            Qoute qoute = itemHolder.qoute;
 
-    @Override
-    public void onItemUncheck(AdapterBrand.BrandHolder item) {
-        //newList.remove(item.singleBrand);
+            bundle.putSerializable("qoute", qoute);
+            ((MainActivity)getActivity()).setBundle(bundle);
+        }
     }
 
     @Override
@@ -95,6 +91,7 @@ public class HomeView extends BaseView implements HomeMvp.View, AdapterBrand.onI
             hiddeCustomDialog();
         }
     }
+
 
     @Override
     public void succesGetQoutes(List<Qoute> qouteList) {

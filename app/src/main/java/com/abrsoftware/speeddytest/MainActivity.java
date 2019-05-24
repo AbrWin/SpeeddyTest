@@ -1,17 +1,13 @@
 package com.abrsoftware.speeddytest;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,16 +15,21 @@ import android.view.View;
 import com.abrsoftware.speeddytest.helper.FirebaseHelper;
 import com.abrsoftware.speeddytest.service.ApiServiceSingleton;
 import com.abrsoftware.speeddytest.view.LoginView.LoginView;
+import com.abrsoftware.speeddytest.view.detailqoute.DetailQouteView;
 import com.abrsoftware.speeddytest.view.homeView.HomeView;
-import com.abrsoftware.speeddytest.view.thankyou.ThankYouView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private TelephonyManager tMgr;
-    private Bundle bundle;
+    private BottomSheetDialog bottomSheet;
+    public Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
         toolbar = findViewById(R.id.toolbar);
-        tMgr = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         setSupportActionBar(toolbar);
         ApiServiceSingleton.getInstance().apiService.initApiService();
         if (FirebaseHelper.getInstance().getAuthReference().getCurrentUser() == null) {
@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             changeFragment(HomeView.class, null);
         }
     }
-
 
 
     public void changeFragment(Class<? extends Fragment> fragmentClass, Bundle bundle) {
@@ -73,13 +72,48 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(showBackBtn);
             getSupportActionBar().setDisplayShowHomeEnabled(showBackBtn);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            });
+            toolbar.setNavigationOnClickListener(v -> onBackPressed());
         }
+    }
+
+    public void inflateBottomSheet(int layout, int style) {
+        bottomSheet = new BottomSheetDialog(MainActivity.this, style);
+        bottomSheet.setContentView(layout);
+        ButterKnife.bind(MainActivity.this, bottomSheet);
+    }
+
+    public void showBottomSheet() {
+        bottomSheet.show();
+    }
+
+    public void dissmissBottomSheet() {
+        bottomSheet.dismiss();
+    }
+
+    public Bundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(Bundle bundle) {
+        this.bundle = bundle;
+    }
+
+    @OnClick(R.id.closeMenu)
+    public void initCloseMenu() {
+        dissmissBottomSheet();
+    }
+
+    @OnClick(R.id.detailQoute)
+    public void detailQoute() {
+        dissmissBottomSheet();
+        changeFragment(DetailQouteView.class, bundle);
+    }
+
+    @OnClick(R.id.optionShare)
+    public void optionShare() {
+        dissmissBottomSheet();
+        Fragment fragmentView = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        Snackbar.make(fragmentView.getView(), getString(R.string.app_name), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -90,38 +124,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
-
-    public TelephonyManager gettMgr() {
-        return tMgr;
-    }
-
-    public void settMgr(TelephonyManager tMgr) {
-        this.tMgr = tMgr;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Fragment fragmentView = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        switch (requestCode) {
-            case 1:
-                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    @SuppressLint("MissingPermission") String number = tMgr.getLine1Number();
-                    String numberText = getString(R.string.tu_msisdn_es) + " " + number;
-                    ((ThankYouView) fragmentView).onResultActivity(numberText);
-                } else {
-                    ((ThankYouView) fragmentView).onResultActivity(getString(R.string.error_msidn));
-                }
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    public interface onResult {
-        void onResultActivity(String number);
     }
 
     @Override

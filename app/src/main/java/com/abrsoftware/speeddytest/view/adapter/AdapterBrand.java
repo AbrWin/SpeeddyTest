@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,6 +55,7 @@ public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder>
     }
 
     public class BrandHolder extends RecyclerView.ViewHolder implements AdapterView.OnClickListener {
+        private final ImageView btnContext;
         private TextView nameBran;
         private TextView resume;
         private ImageView img;
@@ -63,22 +65,19 @@ public class AdapterBrand extends RecyclerView.Adapter<AdapterBrand.BrandHolder>
             nameBran = itemView.findViewById(R.id.title);
             resume = itemView.findViewById(R.id.description);
             img = itemView.findViewById(R.id.imgNews);
-            itemView.setOnClickListener(this);
+            btnContext = itemView.findViewById(R.id.btnContext);
+            btnContext.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View view) {
-            listener.onClickRecipe(this);
+            listener.onClickContext(this);
         }
     }
 
 
     public interface onItemClickListener {
-        void onClickRecipe(BrandHolder itemHolder);
-
-        void onItemCheck(BrandHolder item);
-
-        void onItemUncheck(BrandHolder item);
+        void onClickContext(BrandHolder itemHolder);
     }
 }

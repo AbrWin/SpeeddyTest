@@ -29,4 +29,22 @@
         <item name="android:actionMenuTextColor">@color/colorAccent</item>
     </style>
 
+
+
+    <style name="BottomSheetContext" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_context</item>
+    </style>
+
+    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="BaseBottomSheetDialogContext" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheetContext</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
+    <style name="BottomSheetDialogContext" parent="BaseBottomSheetDialogContext" />
+
 </resources>
