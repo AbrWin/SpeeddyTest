@@ -22,4 +22,5 @@
     <string name="show_detail_quote">Show detail quote</string>
     <string name="share">Share</string>
     <string name="welcome">Welcome</string>
+    <string name="title_activity_react">ReactActivity</string>
 </resources>

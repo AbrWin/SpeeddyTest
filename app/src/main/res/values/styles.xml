@@ -13,7 +13,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorAccent">@android:color/white</item>
     </style>
 
@@ -30,7 +30,6 @@
     </style>
 
 
-
     <style name="BottomSheetContext" parent="@style/Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_sheet_context</item>
     </style>
@@ -45,6 +44,7 @@
     </style>
 
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
+
     <style name="BottomSheetDialogContext" parent="BaseBottomSheetDialogContext" />
 
 </resources>
