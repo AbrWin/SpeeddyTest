@@ -19,8 +19,11 @@
     <string name="thank_you">Thank you Speedy Mobil</string>
     <string name="tu_msisdn_es">Tu msisdn es:</string>
     <string name="error_msidn">Da permiso para ver su número </string>
-    <string name="show_detail_quote">Show detail quote</string>
-    <string name="share">Share</string>
+    <string name="show_detail_quote">Show detail quote Android native</string>
+    <string name="share">how detail quote React native</string>
     <string name="welcome">Welcome</string>
     <string name="title_activity_react">ReactActivity</string>
+    <string name="rating">Rating</string>
+    <string name="rate_this_quote">Rate this quote</string>
+    <string name="rating_succes">Your rating for this qoute is:</string>
 </resources>

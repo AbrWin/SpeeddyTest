@@ -1,7 +1,6 @@
 package com.abrsoftware.speeddytest;
 
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -125,14 +123,14 @@ public class MainActivity extends AppCompatActivity implements DefaultHardwareBa
         dissmissBottomSheet();
         setCurrentView(getSupportFragmentManager().findFragmentById(R.id.fragment_container).getView());
         showToolbar(false, "");
-        changeFragment(DetailQouteReact.class, bundle);
+        changeFragment(DetailQouteView.class, bundle);
     }
 
 
     @OnClick(R.id.optionShare)
     public void optionShare() {
         dissmissBottomSheet();
-        changeFragment(DetailQouteView.class, bundle);
+        changeFragment(DetailQouteReact.class, bundle);
         Fragment fragmentView = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         Snackbar.make(fragmentView.getView(), getString(R.string.app_name), Snackbar.LENGTH_SHORT).show();
     }
@@ -192,33 +190,6 @@ public class MainActivity extends AppCompatActivity implements DefaultHardwareBa
 
     }
 
-    public WindowManager.LayoutParams fixAndroid() {
-        WindowManager.LayoutParams params;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    PixelFormat.TRANSLUCENT);
-        } else {
-            params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.TYPE_SYSTEM_ERROR,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    PixelFormat.TRANSLUCENT);
-        }
-        return params;
-    }
-
-    public WindowManager getServiceW() {
-        return (WindowManager) getSystemService(WINDOW_SERVICE);
-    }
-
-    public View getCurrentView() {
-        return currentView;
-    }
 
     public void setCurrentView(View currentView) {
         this.currentView = currentView;
@@ -233,7 +204,6 @@ public class MainActivity extends AppCompatActivity implements DefaultHardwareBa
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
-
     }
 
     public ReactInstanceManager getmReactInstanceManager() {

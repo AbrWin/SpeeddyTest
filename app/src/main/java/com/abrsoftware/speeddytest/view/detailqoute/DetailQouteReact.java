@@ -10,7 +10,6 @@ import com.abrsoftware.speeddytest.MainActivity;
 import com.abrsoftware.speeddytest.R;
 import com.abrsoftware.speeddytest.view.BaseView;
 import com.facebook.react.ReactRootView;
-
 public class DetailQouteReact extends BaseView {
     private ReactRootView mReactRootView;
 
