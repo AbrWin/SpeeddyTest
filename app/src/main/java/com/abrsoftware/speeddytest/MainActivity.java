@@ -1,22 +1,34 @@
 package com.abrsoftware.speeddytest;
 
+import android.content.Intent;
+import android.graphics.PixelFormat;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
+import android.provider.Settings;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.abrsoftware.speeddytest.helper.FirebaseHelper;
 import com.abrsoftware.speeddytest.service.ApiServiceSingleton;
 import com.abrsoftware.speeddytest.view.LoginView.LoginView;
+import com.abrsoftware.speeddytest.view.detailqoute.DetailQouteReact;
 import com.abrsoftware.speeddytest.view.detailqoute.DetailQouteView;
 import com.abrsoftware.speeddytest.view.homeView.HomeView;
+import com.facebook.react.LifecycleState;
+import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
+import com.facebook.react.shell.MainReactPackage;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
@@ -25,11 +37,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
 
     private Toolbar toolbar;
     private BottomSheetDialog bottomSheet;
     public Bundle bundle;
+    private final int OVERLAY_PERMISSION_REQ_CODE = 1;
+    private View currentView;
+    private ReactInstanceManager mReactInstanceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        createInstanceReact();
+        checkPer();
         ApiServiceSingleton.getInstance().apiService.initApiService();
         if (FirebaseHelper.getInstance().getAuthReference().getCurrentUser() == null) {
             changeFragment(LoginView.class, null);
@@ -106,12 +123,16 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.detailQoute)
     public void detailQoute() {
         dissmissBottomSheet();
-        changeFragment(DetailQouteView.class, bundle);
+        setCurrentView(getSupportFragmentManager().findFragmentById(R.id.fragment_container).getView());
+        showToolbar(false, "");
+        changeFragment(DetailQouteReact.class, bundle);
     }
+
 
     @OnClick(R.id.optionShare)
     public void optionShare() {
         dissmissBottomSheet();
+        changeFragment(DetailQouteView.class, bundle);
         Fragment fragmentView = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         Snackbar.make(fragmentView.getView(), getString(R.string.app_name), Snackbar.LENGTH_SHORT).show();
     }
@@ -141,5 +162,114 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkPer() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Settings.canDrawOverlays(this)) {
+
+                } else {
+                    Toast.makeText(this, "ACTION_MANAGE_OVERLAY_PERMISSION权限已被拒绝", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        }
+        mReactInstanceManager.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    public WindowManager.LayoutParams fixAndroid() {
+        WindowManager.LayoutParams params;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            params = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    PixelFormat.TRANSLUCENT);
+        } else {
+            params = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.TYPE_SYSTEM_ERROR,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    PixelFormat.TRANSLUCENT);
+        }
+        return params;
+    }
+
+    public WindowManager getServiceW() {
+        return (WindowManager) getSystemService(WINDOW_SERVICE);
+    }
+
+    public View getCurrentView() {
+        return currentView;
+    }
+
+    public void setCurrentView(View currentView) {
+        this.currentView = currentView;
+    }
+
+    private void createInstanceReact() {
+        mReactInstanceManager = ReactInstanceManager.builder()
+                .setApplication(getApplication())
+                .setBundleAssetName("index.android.bundle")
+                .setJSMainModuleName("index.android")
+                .addPackage(new MainReactPackage())
+                .setUseDeveloperSupport(BuildConfig.DEBUG)
+                .setInitialLifecycleState(LifecycleState.RESUMED)
+                .build();
+
+    }
+
+    public ReactInstanceManager getmReactInstanceManager() {
+        return mReactInstanceManager;
+    }
+
+    @Override
+    public void invokeDefaultOnBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onPause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onResume(this, this);
+        }
+    }
+
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU && mReactInstanceManager != null) {
+            mReactInstanceManager.showDevOptionsDialog();
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }

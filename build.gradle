@@ -1,4 +1,6 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext {
+    var = '0.11.0'
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
     
@@ -7,6 +9,15 @@ buildscript {
         jcenter()
         maven {
             url "$rootDir/../node_modules/react-native/android"
+        }
+    }
+    configurations.all {
+        resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                if (details.requested.group == 'com.facebook.react' && details.requested.name == 'react-native') {
+                    details.useVersion "<0.42.3>"
+                }
+            }
         }
     }
     dependencies {
